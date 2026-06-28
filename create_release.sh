@@ -182,7 +182,7 @@ cat > "$OUTPUT_DIR/RELEASE_NOTES.md" << EOF
 
 - Date: $(date -Iseconds)
 - Scale: 200 customers, 100 suppliers, 300 products, 500 sale orders, 300 purchase orders
-- Features: Regional deals, seasonal patterns, realistic date distribution
+- Features: Regional deals, seasonal patterns, date distribution
 
 ## License
 

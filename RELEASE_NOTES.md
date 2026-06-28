@@ -4,7 +4,7 @@
 
 ### Initial Release
 
-First release of Summit Demo DB - a realistic ERP dataset based on real system architecture.
+First release of Summit Demo DB - an ERP dataset based on real system architecture.
 
 ### What's Included
 
@@ -12,7 +12,7 @@ First release of Summit Demo DB - a realistic ERP dataset based on real system a
 - 21 interconnected tables covering the complete order-to-cash workflow
 - 200 customers, 100 suppliers, 300 products
 - 500 sales orders, 300 purchase orders
-- Realistic data spanning January 2023 - December 2024
+- Data spanning January 2023 - December 2024
 - European and North American business context (Summit Electronics)
 
 **Export Formats**
@@ -30,7 +30,7 @@ First release of Summit Demo DB - a realistic ERP dataset based on real system a
 
 ### Key Features
 
-- **Realistic Business Data**: Seasonal patterns, regional differences, promotional campaigns
+- **Business Data**: Seasonal patterns, regional differences, promotional campaigns
 - **Proper Referential Integrity**: All foreign keys validated
 - **Multi-Format Support**: Works with CSV, SQLite, PostgreSQL, MSSQL, MariaDB
 - **Docker-Based Generation**: Easy to regenerate with custom parameters

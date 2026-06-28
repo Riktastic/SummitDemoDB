@@ -4,7 +4,7 @@
 
 ## Company Overview
 
-**Summit Electronics** is a fictional mid-sized consumer electronics and home goods retailer. The company profile is designed to provide realistic context for the fabricated ERP dataset, which follows real business patterns and industry standards.
+**Summit Electronics** is a fictional mid-sized consumer electronics and home goods retailer. The company profile is designed to provide context for the fabricated ERP dataset, which follows real business patterns and industry standards.
 
 ## Founding Story
 
@@ -87,20 +87,20 @@ This ERP dataset represents a snapshot of Summit Electronics' operations from Ja
 - **200 customers** across all three geographic markets
 - **100 suppliers** from 12 different countries
 - **300 products** spanning all major categories
-- **500 sale orders** showing realistic seasonal patterns and customer behavior
+- **500 sale orders** showing seasonal patterns and customer behavior
 - **300 purchase orders** reflecting supply chain operations and inventory management
 
 The data includes:
 - Mixed order statuses (confirmed, cancelled, draft) reflecting real business operations
 - Regional promotional campaigns with geography-specific discounts
 - Product seasonality with category-specific demand patterns
-- Realistic date sequencing showing the natural flow from order → delivery → invoice → payment
+- Date sequencing showing the natural flow from order → delivery → invoice → payment
 - Credit notes and refunds representing the 5-8% return rate typical in consumer electronics
 
 ## Why This Dataset Matters
 
 This dataset provides valuable insights for:
-- **Data Visualization Practitioners**: Complex, interconnected data with realistic patterns
+- **Data Visualization Practitioners**: Complex, interconnected data with varied patterns
 - **BI Developers**: Real-world ERP structure with referential integrity
 - **Supply Chain Analysts**: Multi-location inventory and demand patterns
 - **Retail Operations**: Customer segmentation and regional market analysis

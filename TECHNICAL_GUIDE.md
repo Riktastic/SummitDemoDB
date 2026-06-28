@@ -26,7 +26,7 @@ cd /path/to/summit-demo-db
 This single command:
 - Starts Docker containers (database, ERP system, web UI)
 - Initializes the ERP database with demo data
-- Generates realistic ERP records
+- Generates ERP records
 - Exports all tables to CSV format
 
 ### 3. Access the Data

@@ -5,7 +5,7 @@
 # 1. Ensures Docker is running.
 # 2. Initializes Odoo with demo data (one-time).
 # 3. Starts the Odoo web UI.
-# 4. Generates extra realistic records via the Odoo API.
+# 4. Generates extra records via the Odoo API.
 # 5. Exports all configured tables to csv_export/.
 # 6. (Optional) Creates a GitHub release package with all export formats.
 #

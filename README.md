@@ -1,6 +1,6 @@
 # Summit Demo DB
 
-A realistic **fabricated** ERP dataset based on real system architecture, exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
+A fabricated ERP dataset based on real system architecture, exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
 
 **Note**: All data is fabricated and generated for demonstration purposes. The data model follows real ERP patterns, but the customers, orders, and transactions are fictional.
 
@@ -25,7 +25,7 @@ The dataset represents **Summit Electronics**, a fictional consumer electronics 
 - **€50M annual revenue** (2024)
 - **Data period**: January 2023 - December 2024
 
-The dataset includes seasonal patterns, regional differences, and realistic business scenarios.
+The dataset includes seasonal patterns, regional differences, and business scenarios.
 
 *See [COMPANY_STORY.md](COMPANY_STORY.md) for the complete company profile.*
 

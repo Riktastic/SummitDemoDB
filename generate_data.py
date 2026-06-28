@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate a fully interconnected ERP dataset via the ERP system's JSON-RPC API.
 
-This script generates realistic ERP data for Summit Electronics, a fictional
+This script generates ERP data for Summit Electronics, a fictional
 consumer electronics retailer founded in 2018 in Amsterdam, Netherlands. The data reflects:
 - Multi-channel operations (e-commerce, retail stores, B2B)
 - Strong European presence with 35 stores across Netherlands, Germany, Belgium, France, UK
@@ -132,7 +132,7 @@ SEASONAL_PREFERENCES = {
     12: ["Electronics", "Audio"],   # December: Holiday gifts, premium audio
 }
 
-# Regional groupings for realistic deal targeting
+# Regional groupings for deal targeting
 REGIONS = {
     "EUROPE": ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"],
     "NORTH_AMERICA": ["US", "CA", "MX"],
@@ -320,7 +320,7 @@ COMPANY_SUFFIXES = [
 
 
 def generate_company_name():
-    """Build a realistic, unique company name from real word parts."""
+    """Build a unique company name from real word parts."""
     prefix = random.choice(COMPANY_PREFIXES)
     base = fake.last_name() if random.random() < 0.5 else fake.city()
     suffix = random.choice(COMPANY_SUFFIXES)
@@ -328,11 +328,11 @@ def generate_company_name():
 
 
 def generate_contact_name():
-    """Return a realistic person name."""
+    """Return a person name."""
     return f"{fake.first_name()} {fake.last_name()}"
 
 
-# Product vocabulary grouped by realistic category families.
+# Product vocabulary grouped by category families.
 PRODUCT_LINES = {
     "Electronics": [
         ("Wireless Mouse", "consu", 15, 80), ("Mechanical Keyboard", "consu", 50, 250),
@@ -404,7 +404,7 @@ def create_partners(client, count, is_customer):
         country_id = random.choice(country_ids)
         country_code = country_map.get(country_id, False)
         # Use the base en_US faker for address fields; they are available and still
-        # realistic enough when paired with a real country_id.
+        # sufficient when paired with a real country_id.
         records.append(
             {
                 "name": name,
@@ -451,7 +451,7 @@ def create_products(client, count, categories, unit_uom, sale_tax, purchase_tax)
         family = random.choice(list(PRODUCT_LINES.keys()))
         product_families.append(family)
         base, ptype, cost_min, cost_max = random.choice(PRODUCT_LINES[family])
-        # Add a variant / size attribute so names stay unique and realistic.
+        # Add a variant / size attribute so names stay unique.
         variants = ["Standard", "Pro", "Lite", "Plus", "XL", "Compact", "Enterprise", "Basic"]
         variant = random.choice(variants)
         name = f"{base} - {variant}"
@@ -1016,7 +1016,7 @@ def main():
     register_payments(client, vendor_bill_ids, bank_journal_id, order_dates=po_dates)
 
     # --- Sales side ---
-    # Make some customers more active (repeat orders) for a realistic active-customer base.
+    # Make some customers more active (repeat orders) for an active-customer base.
     active_customer_pool = customers + random.choices(customers, k=int(SALE_ORDERS * 0.3))
     sale_ids, so_dates = create_orders(
         client, "sale.order", SALE_ORDERS, active_customer_pool, product_ids,
