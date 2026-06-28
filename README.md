@@ -1,8 +1,10 @@
 # Summit Demo DB
 
-A fabricated ERP dataset based on real system architecture, exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
+A fabricated ERP dataset created by carefully filling a real Odoo database instance, then exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
 
 **Note**: All data is fabricated and generated for demonstration purposes. The data model follows real ERP patterns, but the customers, orders, and transactions are fictional.
+
+**How it works**: The dataset is created by running a real Odoo ERP system in Docker, then using the Odoo API to generate interconnected records. You can even start the actual Odoo instance to follow the entire process from data creation to transformation.
 
 ## Quick Start
 
