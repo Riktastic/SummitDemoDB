@@ -76,6 +76,7 @@ git push origin v1.0.0
 
 - [COMPANY_STORY.md](COMPANY_STORY.md) - Company profile and business context
 - [TECHNICAL_GUIDE.md](TECHNICAL_GUIDE.md) - Technical setup and usage guide
+- [POWERBI_GUIDE.md](POWERBI_GUIDE.md) - Power BI loading and visualization guide
 - [docs/index.html](docs/index.html) - Interactive ERD visualization
 
 ## License
