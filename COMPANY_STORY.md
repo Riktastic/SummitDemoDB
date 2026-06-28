@@ -1,8 +1,10 @@
 # Summit Electronics - Company Profile
 
+**Note**: Summit Electronics is a fictional company created for demonstration purposes. All data about this company, including customers, orders, financials, and operations, is fabricated.
+
 ## Company Overview
 
-**Summit Electronics** is a mid-sized consumer electronics and home goods retailer founded in 2018. Headquartered in Amsterdam, Netherlands, the company has grown from a small online-only startup to a multi-channel retailer with operations across Europe and North America.
+**Summit Electronics** is a fictional mid-sized consumer electronics and home goods retailer. The company profile is designed to provide realistic context for the fabricated ERP dataset, which follows real business patterns and industry standards.
 
 ## Founding Story
 

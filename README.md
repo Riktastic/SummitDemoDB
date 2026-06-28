@@ -1,6 +1,8 @@
 # Summit Demo DB
 
-A realistic ERP dataset based on real system architecture, exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
+A realistic **fabricated** ERP dataset based on real system architecture, exported into multiple formats (CSV, SQLite, PostgreSQL, MSSQL, MariaDB) for analytics, data modeling, and BI exercises.
+
+**Note**: All data is fabricated and generated for demonstration purposes. The data model follows real ERP patterns, but the customers, orders, and transactions are fictional.
 
 ## Quick Start
 
