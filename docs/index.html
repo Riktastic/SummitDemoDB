@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summit Demo DB - Interactive ERD</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #24292e;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+        }
+
+        header {
+            border-bottom: 1px solid #e1e4e8;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0366d6;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #586069;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #24292e;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #0366d6;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #586069;
+        }
+
+        .section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+            color: #586069;
+        }
+
+        .section code {
+            background: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            color: #0366d6;
+        }
+
+        .section pre {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .section pre code {
+            background: none;
+            padding: 0;
+            color: #24292e;
+        }
+
+        .erd-container {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 30px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .erd-container h2 {
+            color: #24292e;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 10px;
+        }
+
+        .erd-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .erd-controls button {
+            background: #0366d6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .erd-controls button:hover {
+            background: #0256c7;
+        }
+
+        .erd-controls button:active {
+            background: #0245a3;
+        }
+
+        .erd-wrapper {
+            overflow: hidden;
+            position: relative;
+            cursor: grab;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .erd-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .erd-content {
+            transform-origin: top left;
+            transition: transform 0.1s ease-out;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .table-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .table-card {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-left: 4px solid #0366d6;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .table-card h4 {
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .table-card p {
+            font-size: 0.9em;
+            color: #586069;
+            margin: 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .feature h3 {
+            color: #0366d6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .feature p {
+            color: #586069;
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        footer {
+            border-top: 1px solid #e1e4e8;
+            padding: 30px 0;
+            margin-top: 50px;
+            text-align: center;
+            color: #586069;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #0366d6;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-right: 5px;
+        }
+
+        strong {
+            color: #24292e;
+        }
+
+        a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Summit Demo DB</h1>
+            <p>Realistic ERP dataset based on real system architecture for data visualization and analysis</p>
+        </header>
+
+        <div class="section">
+            <h2>About Summit Electronics</h2>
+            <p>The dataset represents operations of <strong>Summit Electronics</strong>, a fictional mid-sized consumer electronics and home goods retailer founded in 2018. Headquartered in Amsterdam, Netherlands, the company operates through e-commerce, 45 physical retail locations across Europe and North America, and B2B sales channels.</p>
+            
+            <p><strong>Key Company Details:</strong></p>
+            <ul>
+                <li>Founded: 2018 in Amsterdam, Netherlands</li>
+                <li>Revenue: €50M annually (2024)</li>
+                <li>Operations: 45 retail locations across Netherlands, Germany, Belgium, France, UK, US, and Canada</li>
+                <li>Product Categories: Audio/Video, Smart Home, Computing, Mobile Devices, Home Appliances</li>
+                <li>Business Model: E-commerce (65%), Retail Stores (25%), B2B Sales (10%)</li>
+            </ul>
+            
+            <p>The dataset captures a realistic snapshot of Summit Electronics' operations from January 2023 to December 2024, including seasonal demand patterns, regional market differences, supply chain complexity, and customer segmentation challenges that make the data meaningful for analysis.</p>
+        </div>
+
+        <div class="section">
+            <h2>Overview</h2>
+            <p>This project generates a fully interconnected and realistic ERP dataset using Odoo 18, suitable for data visualization, analysis, and BI exercises. The dataset includes customers, suppliers, products, sales and purchase orders, deliveries, invoices, bills, payments, refunds, and credit notes.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3>🎯 Realistic Data</h3>
+                    <p>Regional deals, seasonal patterns, and natural causality</p>
+                </div>
+                <div class="feature">
+                    <h3>📊 Multiple Formats</h3>
+                    <p>CSV, SQLite, PostgreSQL, MSSQL, MariaDB</p>
+                </div>
+                <div class="feature">
+                    <h3>🔗 Fully Connected</h3>
+                    <p>All tables properly linked with referential integrity</p>
+                </div>
+                <div class="feature">
+                    <h3>📈 Time-Series Ready</h3>
+                    <p>Realistic date distribution over 2 years</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Quick Start</h2>
+            <p>Generate the complete dataset with a single command:</p>
+            <pre><code>./run-all.sh</code></pre>
+            <p>This will:</p>
+            <ul>
+                <li>Initialize Odoo with required modules</li>
+                <li>Generate realistic ERP records (200 customers, 100 suppliers, 300 products, 500 sale orders, 300 purchase orders)</li>
+                <li>Export all tables to CSV format</li>
+            </ul>
+            <p>To create a GitHub release package with all export formats:</p>
+            <pre><code>./run-all.sh --create-release</code></pre>
+        </div>
+
+        <div class="erd-container">
+            <h2>Interactive Entity Relationship Diagram</h2>
+            <p>Use the controls below to zoom and pan the diagram. Click and drag to pan, use buttons to zoom.</p>
+            
+            <div class="erd-controls">
+                <button onclick="zoomIn()">Zoom In (+)</button>
+                <button onclick="zoomOut()">Zoom Out (-)</button>
+                <button onclick="resetZoom()">Reset</button>
+                <button onclick="zoomFit()">Fit to Screen</button>
+            </div>
+            
+            <div class="erd-wrapper" id="erdWrapper">
+                <div class="erd-content" id="erdContent">
+                    <div class="mermaid">
+erDiagram
+    %% Master Data
+    res_partner ||--o{ sale_order : "places"
+    res_partner ||--o{ purchase_order : "supplies"
+    res_partner ||--o{ account_move : "receives"
+    res_partner ||--o{ account_payment : "makes"
+    
+    res_country ||--o{ res_partner : "located in"
+    
+    %% Product Data
+    product_category ||--o{ product_template : "contains"
+    product_template ||--o{ product_product : "variants"
+    product_product ||--o{ sale_order_line : "ordered"
+    product_product ||--o{ purchase_order_line : "purchased"
+    product_product ||--o{ stock_move : "moved"
+    product_product ||--o{ product_taxes_rel : "taxed by"
+    
+    uom_uom ||--o{ product_product : "measured in"
+    uom_uom ||--o{ sale_order_line : "ordered in"
+    uom_uom ||--o{ purchase_order_line : "purchased in"
+    
+    %% Sales
+    sale_order ||--o{ sale_order_line : "contains"
+    sale_order ||--o{ stock_picking : "delivered by"
+    sale_order ||--o{ account_move : "invoiced by"
+    sale_order ||--o{ account_tax_sale_order_line_rel : "taxed by"
+    
+    sale_order_line ||--o{ account_tax_sale_order_line_rel : "has tax"
+    
+    %% Purchase
+    purchase_order ||--o{ purchase_order_line : "contains"
+    purchase_order ||--o{ stock_picking : "received by"
+    purchase_order ||--o{ account_move : "billed by"
+    purchase_order ||--o{ account_tax_purchase_order_line_rel : "taxed by"
+    
+    purchase_order_line ||--o{ account_tax_purchase_order_line_rel : "has tax"
+    
+    %% Warehouse
+    stock_warehouse ||--o{ stock_picking : "manages"
+    stock_warehouse ||--o{ stock_location : "contains"
+    stock_location ||--o{ stock_move : "source/dest"
+    
+    stock_picking ||--o{ stock_move : "contains"
+    stock_move ||--o{ stock_quant : "affects"
+    
+    %% Accounting
+    account_journal ||--o{ account_move : "records"
+    account_journal ||--o{ account_payment : "processes"
+    
+    account_move ||--o{ account_move_line : "contains"
+    account_move ||--o{ account_payment : "paid by"
+    
+    account_tax ||--o{ product_taxes_rel : "applies to"
+    account_tax ||--o{ account_tax_sale_order_line_rel : "applies to"
+    account_tax ||--o{ account_tax_purchase_order_line_rel : "applies to"
+    
+    res_partner {
+        int id PK
+        string name
+        string email
+        string phone
+        int country_id FK
+        boolean customer
+        boolean supplier
+    }
+    
+    res_country {
+        int id PK
+        string name
+        string code
+    }
+    
+    product_category {
+        int id PK
+        string name
+        int parent_id FK
+    }
+    
+    product_template {
+        int id PK
+        string name
+        int categ_id FK
+        float list_price
+        float standard_price
+    }
+    
+    product_product {
+        int id PK
+        int product_tmpl_id FK
+        string default_code
+        int uom_id FK
+    }
+    
+    uom_uom {
+        int id PK
+        string name
+        string uom_type
+    }
+    
+    sale_order {
+        int id PK
+        int partner_id FK
+        date date_order
+        string state
+        float amount_total
+    }
+    
+    sale_order_line {
+        int id PK
+        int order_id FK
+        int product_id FK
+        float product_uom_qty
+        float price_unit
+        int uom_id FK
+    }
+    
+    purchase_order {
+        int id PK
+        int partner_id FK
+        date date_order
+        string state
+        float amount_total
+    }
+    
+    purchase_order_line {
+        int id PK
+        int order_id FK
+        int product_id FK
+        float product_qty
+        float price_unit
+        int product_uom FK
+    }
+    
+    stock_warehouse {
+        int id PK
+        string name
+        int company_id FK
+    }
+    
+    stock_picking {
+        int id PK
+        int location_id FK
+        int location_dest_id FK
+        string state
+        date date_done
+    }
+    
+    stock_move {
+        int id PK
+        int picking_id FK
+        int product_id FK
+        int location_id FK
+        int location_dest_id FK
+        float product_uom_qty
+    }
+    
+    account_journal {
+        int id PK
+        string name
+        string type
+        string code
+    }
+    
+    account_move {
+        int id PK
+        int journal_id FK
+        int partner_id FK
+        date date
+        string move_type
+        float amount_total
+    }
+    
+    account_move_line {
+        int id PK
+        int move_id FK
+        int account_id FK
+        float debit
+        float credit
+    }
+    
+    account_payment {
+        int id PK
+        int journal_id FK
+        int partner_id FK
+        float amount
+        date payment_date
+    }
+    
+    account_tax {
+        int id PK
+        string name
+        float amount
+        string type_tax_use
+    }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Database Schema</h2>
+            <p>The dataset consists of 21 interconnected tables organized into the following categories:</p>
+            
+            <div class="table-info">
+                <div class="table-card">
+                    <h4>👥 Master Data</h4>
+                    <p>res_partner, res_country, product_category, product_template, product_product, uom_uom</p>
+                </div>
+                <div class="table-card">
+                    <h4>🛒 Sales</h4>
+                    <p>sale_order, sale_order_line</p>
+                </div>
+                <div class="table-card">
+                    <h4>📦 Purchases</h4>
+                    <p>purchase_order, purchase_order_line</p>
+                </div>
+                <div class="table-card">
+                    <h4>🏭 Warehouse</h4>
+                    <p>stock_warehouse, stock_picking, stock_move</p>
+                </div>
+                <div class="table-card">
+                    <h4>💰 Accounting</h4>
+                    <p>account_journal, account_move, account_move_line, account_payment, account_tax</p>
+                </div>
+                <div class="table-card">
+                    <h4>🔗 Relationships</h4>
+                    <p>product_taxes_rel, account_tax_sale_order_line_rel, account_tax_purchase_order_line_rel</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Data Realism Features</h2>
+            <p>The generated data includes several realism enhancements:</p>
+            <ul>
+                <li><strong>Regional Deals:</strong> Promo codes restricted by region (e.g., Europe-only deals)</li>
+                <li><strong>Seasonal Patterns:</strong> Holiday-based ordering bias (Christmas, Black Friday, New Year)</li>
+                <li><strong>Product Seasonality:</strong> Different product categories preferred by month</li>
+                <li><strong>Skewed Demand:</strong> 20% of customers generate 60% of orders</li>
+                <li><strong>Promoted Products:</strong> 5% of products have 15% higher demand</li>
+                <li><strong>Realistic Dates:</strong> Order dates spread over 2 years with proper date sequencing</li>
+                <li><strong>Mixed Statuses:</strong> Orders have confirmed, cancelled, and draft states</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Export Formats</h2>
+            <p>The data can be exported in multiple formats:</p>
+            <ul>
+                <li><strong>CSV:</strong> Individual files for each table in <code>csv_export/</code></li>
+                <li><strong>SQLite:</strong> Single database file with all tables</li>
+                <li><strong>PostgreSQL:</strong> Native SQL dump for PostgreSQL</li>
+                <li><strong>MSSQL:</strong> Converted SQL for Microsoft SQL Server</li>
+                <li><strong>MariaDB:</strong> Converted SQL for MariaDB/MySQL</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Scale Configuration</h2>
+            <p>Default scale (configurable via environment variables):</p>
+            <ul>
+                <li>200 customers</li>
+                <li>100 suppliers</li>
+                <li>300 products</li>
+                <li>500 sale orders</li>
+                <li>300 purchase orders</li>
+            </ul>
+            <p>Example:</p>
+            <pre><code>export GEN_SALE_ORDERS="5000"
+export GEN_PRODUCTS="2000"
+./run-all.sh</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>License</h2>
+            <p>This demo data is provided as-is for testing and development purposes.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Generated with Odoo 18 • Last updated: <span id="date"></span></p>
+    </footer>
+
+    <script>
+        let currentScale = 1;
+        let isDragging = false;
+        let startX, startY, translateX = 0, translateY = 0;
+
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            er: {
+                layoutDirection: 'TB',
+                minEntityWidth: 100,
+                minEntityHeight: 75,
+                entityPadding: 15,
+                useMaxWidth: true
+            }
+        });
+
+        const erdWrapper = document.getElementById('erdWrapper');
+        const erdContent = document.getElementById('erdContent');
+
+        function updateTransform() {
+            erdContent.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+        }
+
+        function zoomIn() {
+            currentScale = Math.min(currentScale + 0.2, 3);
+            updateTransform();
+        }
+
+        function zoomOut() {
+            currentScale = Math.max(currentScale - 0.2, 0.3);
+            updateTransform();
+        }
+
+        function resetZoom() {
+            currentScale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+        }
+
+        function zoomFit() {
+            const wrapperWidth = erdWrapper.clientWidth;
+            const contentWidth = erdContent.scrollWidth;
+            currentScale = Math.min(wrapperWidth / contentWidth, 1);
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+        }
+
+        erdWrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+        });
+
+        erdWrapper.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            translateX = e.clientX - startX;
+            translateY = e.clientY - startY;
+            updateTransform();
+        });
+
+        erdWrapper.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        erdWrapper.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        erdWrapper.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+            currentScale = Math.max(0.3, Math.min(3, currentScale + delta));
+            updateTransform();
+        });
+
+        document.getElementById('date').textContent = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
